@@ -1,0 +1,27 @@
+.circle{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10%;
+}
+
+
+.click {
+    
+	margin: 30px;
+	height: calc(150px + 6vw);
+	width: calc(150px + 6vw);
+	
+	box-shadow: 0 0 10px 10px rgba(247, 252, 0, 0.5);
+}
+
+.click.active {
+	border-radius: 30%;
+	background-image: url("https://images.unsplash.com/photo-1545231097-cbd796f1d95f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1095&q=80"), linear-gradient(#b9fa95, #0fd850);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+  }
+
+ 
