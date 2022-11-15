@@ -12,18 +12,49 @@ class App extends Component {
     circle: [1, 2, 3, 4],
     score: 0,
     current: 0,
+    pace:1000,
   };
+   
+  timer;
 
-  startGameHandler = (e) => {
-    console.log("start game");
-  };
 
-  stopGameHandler = (e) => {
+  nextCircle= () => {
+    let nextActive;
+
+    do {
+      nextActive=randomNumber(0, this.state.circle.length-1)
+    }
+    while(nextActive === this.state.current)
+  
+    this.setState({
+      current: nextActive,
+
+    })
+    console.log(this.state.current);
+
+    this.timer= setTimeout(this.nextCircle, this.state.pace*0.95);
+  }
+
+
+
+  startGameHandler = () => {
+    console.log("start game")
+    this.nextCircle();
+    };
+
+  stopGameHandler = () => {
+    clearTimeout=this.timer;
+    this.setState({
+      current: undefined,
+    })
     console.log("stop game");
   };
 
   scoreHandler = (i) => {
+
+    if(i===this.state.current){
     this.setState({ score: this.state.score + 1 });
+    }
   };
 
   render() {
@@ -42,7 +73,8 @@ class App extends Component {
           </h2>
           <div className="circle">
             {this.state.circle.map((_, i) => (
-              <Circle key={i} click={() => this.scoreHandler(i)} id={i + 1} />
+              <Circle key={i} click={() => this.scoreHandler(i)} id={i + 1}
+              active= {this.state.current===i} />
             ))}
           </div>
 
