@@ -11,5 +11,5 @@ CSS
 
 ScreenShot
 
-![start screen](./public/images/start.png)
+
 
