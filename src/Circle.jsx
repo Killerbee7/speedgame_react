@@ -7,7 +7,7 @@ const Circle = (props) => {
             onClick={props.click}
             style={{pointerEvents: props.activeEvent ? "all" : "none"}}
             >
-                <p>{props.id}</p>
+                
                 </div>
 
         </div>

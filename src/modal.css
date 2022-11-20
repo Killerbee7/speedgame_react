@@ -1,6 +1,69 @@
-.modal{
-    position: relative;
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
     height: 100vh;
     width: 100%;
+    background-color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+  .score {
+    background-image: linear-gradient(
+      45deg,
+      hsl(240deg 100% 20%) 0%,
+      hsl(289deg 100% 21%) 11%,
+      hsl(315deg 100% 27%) 22%,
+      hsl(329deg 100% 36%) 33%,
+      hsl(337deg 100% 43%) 44%,
+      hsl(357deg 91% 59%) 56%,
+      hsl(17deg 100% 59%) 67%,
+      hsl(34deg 100% 53%) 78%,
+      hsl(45deg 100% 50%) 89%,
+      hsl(55deg 100% 50%) 100%);
+      box-shadow: 0 0 10px 10px rgba(247, 252, 0, 0.5);
+      padding: 2rem;
+      width: 1240px;
+      height: 420px;
+    
+    position: relative;
+    
+  }
+
+
+  
+  .close{
+    position: absolute;
+    align-items: center;
+    background-color: transparent;
+    color: rgb(9, 9, 9);
+    border-radius: 25%;
+    font-size: 3rem;
+    width: 5rem;
+    height: 5rem;
+    top: -0px;
+    right: -0px;
+    cursor: pointer;
+    box-shadow: 0 0 10px 10px rgba(247, 252, 0, 0.5);
+  }
+  .close:hover
+{
+  background: #03e9f4;
+  color: #050801;
+  box-shadow: 0 0 5px #03e9f4,
+        0 0 25px #03e9f4,
+        0 0 50px #03e9f4,
+        0 0 200px #03e9f4;
 }
 
+.score h1{
+  color: rgb(0, 250, 37);
+  margin-bottom: 40px;
+}
+
+.score p span{
+  color: #ffffff;
+}

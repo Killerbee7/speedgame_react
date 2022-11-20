@@ -1,6 +1,6 @@
 import "./App.css";
 import "./circle.css";
-import "./modal.css"
+import "./modal.css";
 import React, { Component } from "react";
 import Circle from "./Circle";
 import Modal from "./Modal";
@@ -14,52 +14,49 @@ class App extends Component {
     circle: [1, 2, 3, 4],
     score: 0,
     current: 0,
-    pace:1000,
+    pace: 1000,
     gameStart: false,
     gameOver: false,
     lives: 3,
     round: 0,
-    start:false,
+    start: false,
   };
-   
+
   timer;
 
+  nextCircle = () => {
+    if (this.state.lives <= 0) {
+      this.stopGameHandler();
+      return;
+    }
 
-  nextCircle= () => {
     let nextActive;
 
     do {
-      nextActive=randomNumber(0, this.state.circle.length-1)
-    }
-    while(nextActive === this.state.current)
-  
+      nextActive = randomNumber(0, this.state.circle.length - 1);
+    } while (nextActive === this.state.current);
+
     this.setState({
       current: nextActive,
-      lives: this.state.lives -1
-    })
+    });
 
-    this.timer= setTimeout(this.nextCircle, this.state.pace*0.95);
-  }
-
-
+    this.timer = setTimeout(this.nextCircle, this.state.pace * 0.85);
+  };
 
   startGameHandler = () => {
-    if(this.state.lives===0){
+    if (this.state.lives === 0) {
       this.stopGameHandler();
+    } else {
+      console.log("start game");
+      this.nextCircle();
+      this.setState({
+        gameStart: true,
+        start: !this.state.start,
+      });
     }
-    else{
-    console.log("start game")
-    this.nextCircle();
-    this.setState({
-      gameStart: true,
-      start:!this.state.start,
-     
-    })
-  }
-    };
+  };
 
   stopGameHandler = () => {
-    
     clearTimeout(this.timer);
     this.setState({
       current: undefined,
@@ -67,34 +64,24 @@ class App extends Component {
       lives: 3,
       start: false,
       gameOver: true,
-    })
-    
-  
+    });
   };
 
   scoreHandler = (i) => {
-
-    if(i===this.state.current){
-    this.setState({ 
-      score: this.state.score + 1,
-      
-     });
-    }
-
-
-    else if(i!==this.state.current){
-      this.setState({ 
-        lives: this.state.lives-1, 
+    if (i === this.state.current) {
+      this.setState({
+        score: this.state.score + 1,
       });
-        if(this.state.lives== 0){
-          this.stopGameHandler();
-        }
-      }
-    };
-
-    closeHandler = () => {
-      window.location.reload();
+    } else if (i !== this.state.current) {
+      this.setState({
+        lives: this.state.lives - 1,
+      });
     }
+  };
+
+  closeHandler = () => {
+    window.location.reload();
+  };
 
   render() {
     return (
@@ -112,33 +99,51 @@ class App extends Component {
           </h2>
           <div className="circle">
             {this.state.circle.map((_, i) => (
-              <Circle key={i} click={() => this.scoreHandler(i)} id={i + 1}
-              active= {this.state.current===i}
-              activeEvent={this.state.start} />
+              <Circle
+                key={i}
+                click={() => this.scoreHandler(i)}
+                id={i + 1}
+                active={this.state.current === i}
+                activeEvent={this.state.start}
+              />
             ))}
           </div>
 
-          {this.state.gameOver &&
-          (<Modal
-          score={this.state.score}
-          close={this.closeHandler}
-          />)}
+          {this.state.gameOver && (
+            <Modal
+              score={this.state.score}
+              close={this.closeHandler}
+              message={
+                this.state.score === 0
+                  ? "Try Harder Next Time"
+                  : this.state.score <= 10
+                  ? `Nice! You scored ${this.state.score}. You are getting better.`
+                  : this.state.score >= 20
+                  ? `Great! You scored ${this.state.score}. You are awesome.`
+                  : `Excellent! You scored ${this.state.score}`
+              }
+            />
+          )}
 
           <div className="btn">
-            <a href="#" onClick={this.startGameHandler}>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              Start Game
-            </a>
-            <a href="#" onClick={this.stopGameHandler}>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              Stop Game
-            </a>
+            {!this.state.gameStart && !this.state.gameOver && (
+              <a href="#" onClick={this.startGameHandler}>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Start Game
+              </a>
+            )}
+            {this.state.gameStart && (
+              <a href="#" onClick={this.stopGameHandler}>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Stop Game
+              </a>
+            )}
           </div>
         </div>
       </div>
