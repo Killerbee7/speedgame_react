@@ -148,7 +148,7 @@ class App extends Component {
 
           <div className="btn">
             {!this.state.gameStart && !this.state.gameOver && (
-              <a href="#" onClick={this.startGameHandler}>
+              <a onClick={this.startGameHandler}>
                 <span></span>
                 <span></span>
                 <span></span>
@@ -157,7 +157,7 @@ class App extends Component {
               </a>
             )}
             {this.state.gameStart && (
-              <a href="#" onClick={this.stopGameHandler}>
+              <a onClick={this.stopGameHandler}>
                 <span></span>
                 <span></span>
                 <span></span>
