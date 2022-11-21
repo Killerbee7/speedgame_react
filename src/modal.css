@@ -26,7 +26,9 @@
       hsl(55deg 100% 50%) 100%);
       box-shadow: 0 0 10px 10px rgba(247, 252, 0, 0.5);
       padding: 2rem;
-      width: 1240px;
+       width: 50%;
+      
+
       height: 420px;
     
     position: relative;

@@ -5,6 +5,21 @@ import React, { Component } from "react";
 import Circle from "./Circle";
 import Modal from "./Modal";
 
+//Sounds
+import clicks from "./sound/click.wav";
+import wrongClicks from "./sound/wrongclick.wav";
+import start from "./sound/gamestartbtn.wav";
+import game from "./sound/gameover.wav";
+import gameSounds from "./sound/game.wav";
+
+
+
+const click =new Audio(clicks);
+const wrongClick = new Audio(wrongClicks);
+const startBtn = new Audio(start);
+const gameOver= new Audio(game)
+const gameSound = new Audio(gameSounds);
+
 let randomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1));
 };
@@ -44,9 +59,11 @@ class App extends Component {
   };
 
   startGameHandler = () => {
+    startBtn.play();
     if (this.state.lives === 0) {
       this.stopGameHandler();
     } else {
+      gameSound.play();
       console.log("start game");
       this.nextCircle();
       this.setState({
@@ -57,6 +74,8 @@ class App extends Component {
   };
 
   stopGameHandler = () => {
+    gameSound.pause();
+    gameOver.play();
     clearTimeout(this.timer);
     this.setState({
       current: undefined,
@@ -72,10 +91,12 @@ class App extends Component {
       this.setState({
         score: this.state.score + 1,
       });
+      click.play();
     } else if (i !== this.state.current) {
       this.setState({
         lives: this.state.lives - 1,
       });
+      wrongClick.play();
     }
   };
 
